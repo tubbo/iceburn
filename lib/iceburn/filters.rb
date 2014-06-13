@@ -11,7 +11,7 @@ module Iceburn
 
     # Return blank on all requests to the root path.
     def index
-      render text: ''
+      handle_html_requests
     end
 
     # Define this method to enable controllers that have been
@@ -26,7 +26,7 @@ module Iceburn
       return if request.xhr?
 
       respond_to do |format|
-        format.html { render text: '' }
+        format.html { render text: '', layout: 'application' }
       end and return # block the rest of the chain
     end
 
