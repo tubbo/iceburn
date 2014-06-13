@@ -9,16 +9,30 @@ module Iceburn
 
     included { before_filter :handle_html_requests }
 
+    # Return blank on all requests to the root path.
+    def index
+      render text: ''
+    end
+
+    # Define this method to enable controllers that have been
+    # whitelisted so users can access their HTML view responses.
+    def whitelisted_controllers
+      []
+    end
+
     protected
     def handle_html_requests
       return if json_request? || whitelisted?
       return if request.xhr?
-      respond_to { |format| format.html { render 'application/index' } }
+
+      respond_to do |format|
+        format.html { render text: '' }
+      end and return # block the rest of the chain
     end
 
     private
     def whitelisted?
-      params[:controller] =~ /admin|devise/
+      whitelisted_controllers.include? params[:controller]
     end
 
     def json_request?

@@ -1,41 +1,4 @@
-# Iceburn
-
-A quick and dirty Rails plugin for client-side javascript apps. Adds
-filters to your controller and routes to your router to allow a
-client-side JS app to take over the entire page.
-
-## Setup
-
-Install the gem with Bundler:
-
-```ruby
-gem 'iceburn'
-```
-
-## Usage
-
-Add this mixin to **app/controllers/application_controller.rb**:
-
-```ruby
-class ApplicationController < ActionController::Base
-  include Iceburn::Filters
-end
-```
-
-And this one to your **config/routes.rb**:
-
-```ruby
-Rails.application.routes.draw do
-  extend Iceburn::Routes
-end
-```
-
-And you'll get a free route that points to 'application#index' and just
-returns an empty string, allowing your JS app to take over the layout.
-
-## License
-
-[University of Illinois/NCSA Open Source License][ncsa]
+University of Illinois/NCSA Open Source License
 
     Copyright (c) 2014 Tom Scott
     All rights reserved.
@@ -64,4 +27,3 @@ returns an empty string, allowing your JS app to take over the layout.
     OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
     DEALINGS WITH THE SOFTWARE.
 
-[ncsa]: http://opensource.org/licenses/NCSA

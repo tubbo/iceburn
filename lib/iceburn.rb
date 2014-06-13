@@ -1,5 +1,6 @@
 require 'iceburn/version'
 require 'iceburn/filters'
+require 'iceburn/routes'
 
 # A library for defining "blank" routes that are returned whenever HTML
 # is requested from the Rails router.

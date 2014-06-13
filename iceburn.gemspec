@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.homepage    = "http://github.com/tubbo/iceburn"
   s.summary     = "HTTP request hijacker for ActionController and API-driven Rails apps"
   s.description = s.summary
-  s.license     = "MIT"
+  s.license     = "NCSA"
 
   s.files = `git ls-files`.split("\n")
   s.test_files = s.files.grep(/\Aspec/)
@@ -21,4 +21,5 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "pg"
   s.add_development_dependency "rspec"
+  s.add_development_dependency "rspec-rails"
 end
