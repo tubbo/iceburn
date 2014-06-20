@@ -24,10 +24,7 @@ module Iceburn
     def handle_html_requests
       return if json_request? || whitelisted?
       return if request.xhr?
-
-      respond_to do |format|
-        format.html { render text: '', layout: 'application' }
-      end and return # block the rest of the chain
+      render text: '', layout: 'application' and return # block the rest of the chain
     end
 
     private
