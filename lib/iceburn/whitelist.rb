@@ -26,7 +26,7 @@ module Iceburn
 
     private
     def iceburn_whitelisted_controllers
-      self.class.iceburn_whitelisted_controllers
+      self.class.iceburn_whitelisted_controllers || []
     end
   end
 end
