@@ -7,7 +7,9 @@ module Iceburn
       include Filters
 
       def index
-        render json: { attr: 'value' }
+        respond_to do |format|
+          format.json { render json: { attr: 'value' } }
+        end
       end
     end
 
@@ -16,7 +18,7 @@ module Iceburn
     end
 
     it "stops html requests and returns a blank response" do
-      get :index
+      get :index, :format => :html
 
       expect(response).to be_success
       expect(response.header['Content-Type']).to match('text/html')
