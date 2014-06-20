@@ -1,22 +1,15 @@
-#require 'active_support/concern'
+require 'iceburn/whitelist'
 
 # The before_filter used to handle HTML requests that aren't caught by
 # the main application routes.
 
 module Iceburn
   module Filters
-    #extend ActiveSupport::Concern
-    #included { before_filter :handle_html_requests }
+    include Whitelist
 
     # Return blank on all requests to the root path.
     def index
       handle_html_requests
-    end
-
-    # Define this method to enable controllers that have been
-    # whitelisted so users can access their HTML view responses.
-    def whitelisted_controllers
-      []
     end
 
     protected
@@ -27,9 +20,6 @@ module Iceburn
     end
 
     private
-    def whitelisted?
-      whitelisted_controllers.include? params[:controller]
-    end
 
     def json_request?
       "#{params[:format]}" == 'json'
