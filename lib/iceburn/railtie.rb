@@ -2,8 +2,10 @@ module Iceburn
   # Hook into Rails.
   class Railtie < Rails::Railtie
     initializer 'iceburn.add_filters' do
-      class ApplicationController < ActionController::Base
-        include Iceburn::Filters
+      module ActionController
+        class Base < Metal
+          include Iceburn::Filters
+        end
       end
     end
 
