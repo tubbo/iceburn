@@ -1,13 +1,12 @@
-require 'active_support/concern'
+#require 'active_support/concern'
 
 # The before_filter used to handle HTML requests that aren't caught by
 # the main application routes.
 
 module Iceburn
   module Filters
-    extend ActiveSupport::Concern
-
-    included { before_filter :handle_html_requests }
+    #extend ActiveSupport::Concern
+    #included { before_filter :handle_html_requests }
 
     # Return blank on all requests to the root path.
     def index

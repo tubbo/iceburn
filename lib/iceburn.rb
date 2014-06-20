@@ -1,6 +1,7 @@
 require 'iceburn/version'
 require 'iceburn/filters'
 require 'iceburn/routes'
+require 'iceburn/railtie'
 
 # A library for defining "blank" routes that are returned whenever HTML
 # is requested from the Rails router.
