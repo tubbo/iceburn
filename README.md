@@ -12,25 +12,37 @@ Install the gem with Bundler:
 gem 'iceburn'
 ```
 
-## Usage
-
-Add this mixin to **app/controllers/application_controller.rb**:
-
-```ruby
-class ApplicationController < ActionController::Base
-  include Iceburn::Filters
-end
-```
-
-And this one to your **config/routes.rb**:
+Add the following line to **config/routes.rb**:
 
 ```ruby
 Rails.application.routes.draw do
-  extend Iceburn::Routes
+  iceburn_html!
 end
 ```
 
-And you'll get a free route that points to 'application#index' and just
+And this to `ApplicationController`:
+
+```ruby
+class ApplicationController < ActionController::Base
+  before_action :filter_html_requests
+end
+```
+
+## Usage
+
+To whitelist controllers, define a whitelist:
+
+```ruby
+class ApplicationController < ActionController::Base
+  iceburn_whitelist 'devise/sessions'
+  before_action :filter_html_requests
+end
+```
+
+This will not run the `filter_html_requests` method on such controllers,
+as they interfere with the normal process.
+
+You also get a "free" route that points to 'application#index' and just
 returns an empty string, allowing your JS app to take over the layout.
 
 ## License
