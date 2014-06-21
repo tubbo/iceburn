@@ -24,7 +24,6 @@ module Iceburn
       iceburn_whitelisted_controllers.include? params[:controller]
     end
 
-    private
     def iceburn_whitelisted_controllers
       self.class.iceburn_whitelisted_controllers || []
     end
