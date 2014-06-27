@@ -9,11 +9,11 @@ module Iceburn
     extend ActiveSupport::Concern
 
     module ClassMethods
-      cattr_accessor :iceburn_whitelisted_controllers
+      cattr_accessor :iceburn_whitelisted_routes
 
       # Set the whitelist of controllers not affected by Filters.
-      def iceburn_whitelist(*controllers)
-        self.iceburn_whitelisted_controllers = controllers
+      def iceburn_whitelist(*routes)
+        self.iceburn_whitelisted_routes = routes
       end
     end
 
@@ -21,11 +21,22 @@ module Iceburn
     # Test if this controller is in the pre-defined whitelist controller
     # params.
     def whitelisted?
-      iceburn_whitelisted_controllers.include? params[:controller]
+      controller_whitelisted? || action_whitelisted?
     end
 
-    def iceburn_whitelisted_controllers
-      self.class.iceburn_whitelisted_controllers || []
+    private
+    def controller_whitelisted?
+      iceburn_whitelisted_routes.include? params[:controller]
+    end
+
+    def action_whitelisted?
+      iceburn_whitelisted_routes.any? do |route|
+        route =~ /#{params[:controller]}##{params[:action]}/
+      end
+    end
+
+    def iceburn_whitelisted_routes
+      self.class.iceburn_whitelisted_routes || []
     end
   end
 end
