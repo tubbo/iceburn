@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Iceburn by tubbo</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/tubbo/iceburn">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/tubbo/iceburn/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/tubbo/iceburn/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Iceburn</h1>
+          <p>HTTP request hijacker for Rails apps which use a client-side JS app as a frontend</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/tubbo">tubbo</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
+<a name="iceburn" class="anchor" href="#iceburn"><span class="octicon octicon-link"></span></a>Iceburn</h1>
+
+<p>A quick and dirty Rails plugin for client-side javascript apps. Adds
+filters to your controller and routes to your router to allow a
+client-side JS app to take over the entire page.</p>
+
+<h2>
+<a name="setup" class="anchor" href="#setup"><span class="octicon octicon-link"></span></a>Setup</h2>
+
+<p>Install the gem with Bundler:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="n">gem</span> <span class="s1">'iceburn'</span>
+</pre></div>
+
+<p>Add the following line to <strong>config/routes.rb</strong>:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="no">Rails</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">routes</span><span class="o">.</span><span class="n">draw</span> <span class="k">do</span>
+  <span class="n">iceburn_html!</span>
+<span class="k">end</span>
+</pre></div>
+
+<p>And this to <code>ApplicationController</code>:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">before_action</span> <span class="ss">:filter_html_requests</span>
+<span class="k">end</span>
+</pre></div>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>To whitelist controllers, define a whitelist:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">iceburn_whitelist</span> <span class="s1">'devise/sessions'</span>
+  <span class="n">before_action</span> <span class="ss">:filter_html_requests</span>
+<span class="k">end</span>
+</pre></div>
+
+<p>This will not run the <code>filter_html_requests</code> method on such controllers,
+as they interfere with the normal process.</p>
+
+<p>You also get a "free" route that points to 'application#index' and just
+returns an empty string, allowing your JS app to take over the layout.</p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p><a href="http://opensource.org/licenses/NCSA">University of Illinois/NCSA Open Source License</a></p>
+
+<pre><code>Copyright (c) 2014 Tom Scott
+All rights reserved.
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the "Software"),
+to deal with the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions:
+
+Redistributions of source code must retain the above copyright notice,
+this list of conditions and the following disclaimers.
+
+Redistributions in binary form must reproduce the above copyright notice,
+this list of conditions and the following disclaimers in the documentation
+and/or other materials provided with the distribution.
+
+None of the names of its contributors may be used to endorse or promote
+products derived from this Software without specific prior written permission.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE CONTRIBUTORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS WITH THE SOFTWARE.
+</code></pre>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
