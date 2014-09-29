@@ -20,7 +20,7 @@ module Iceburn
     initializer 'iceburn.routes' do
       if config.iceburn
         ActionDispatch::Routing::Mapper.class_eval do
-          extend Iceburn::Routes
+          include Iceburn::Routes
         end
       end
     end
