@@ -5,16 +5,23 @@ require 'iceburn/whitelist'
 module Iceburn
   # Hook into Rails.
   class Railtie < Rails::Railtie
+    # Enable or disable iceburn.
+    config.iceburn = true
+
     initializer 'iceburn.controller_filters' do
-      ApplicationController.class_eval do
-        include Iceburn::Whitelist
-        include Iceburn::Filters
+      if config.iceburn
+        ActionController::Base.class_eval do
+          include Iceburn::Whitelist
+          include Iceburn::Filters
+        end
       end
     end
 
     initializer 'iceburn.routes' do
-      ActionDispatch::Routing::Mapper.class_eval do
-        include Iceburn::Routes
+      if config.iceburn
+        ActionDispatch::Routing::Mapper.class_eval do
+          extend Iceburn::Routes
+        end
       end
     end
   end

@@ -4,6 +4,12 @@
 
 module Iceburn
   module Filters
+    extend ActiveSupport::Concern
+
+    included do
+      before_action :handle_html_requests
+    end
+
     # Return blank on all requests to the root path.
     def index
       handle_html_requests
