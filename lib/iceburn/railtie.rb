@@ -6,7 +6,7 @@ module Iceburn
   # Hook into Rails.
   class Railtie < Rails::Railtie
     initializer 'iceburn.controller_filters' do
-      ActionController::Base.class_eval do
+      ApplicationController.class_eval do
         include Iceburn::Whitelist
         include Iceburn::Filters
       end
